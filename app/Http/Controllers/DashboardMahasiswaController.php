@@ -100,32 +100,38 @@ class DashboardMahasiswaController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateMahasiswaRequest $request, Mahasiswa $mahasiswa)
+    // public function update(UpdateMahasiswaRequest $request, Mahasiswa $mahasiswa)
+    // {
+    public function update(Request $request, Mahasiswa $mahasiswa)
     {
-        dd($request);
-        $rules = [
-            'npm' => 'required',
-            'nama' => 'required|max:255',
-            'jk' => 'required',
-            'angkatan' => 'required',
-            'prodi_id' => 'required',
-            'kelas' => 'required',
-            'status_aktif' => 'required'
-        ];
-        $validateData = $request->validate($rules);
+        try {
+            // dd($request->all());
+            $rules = [
+                'npm' => 'required',
+                'nama' => 'required|max:255',
+                'jk' => 'required',
+                'angkatan' => 'required',
+                'prodi_id' => 'required',
+                'kelas' => 'required',
+                'status_aktif' => 'required'
+            ];
+            $validateData = $request->validate($rules);
 
-        $validate = Validator::make($validateData, $rules);
+            $validate = Validator::make($validateData, $rules);
 
-        if (!$validate->fails()) {
-            User::where('id', $mahasiswa->user_id)->update([
-                'name' => $request->nama,
-                'username' => $request->npm,
-            ]);
+            if (!$validate->fails()) {
+                User::where('id', $mahasiswa->user_id)->update([
+                    'name' => $request->nama,
+                    'username' => $request->npm,
+                ]);
+            }
+            $validateData['user_id'] = User::where('username', $request->npm)->value('id');
+            Mahasiswa::where('id', $mahasiswa->id)->update($validateData);
+
+            return redirect('/dashboard/mahasiswas')->with('success', 'Data Berhasil Diubah');
+        } catch (Exception $e) {
+            dd($e->getMessage());
         }
-        $validateData['user_id'] = User::where('username', $request->npm)->value('id');
-        Mahasiswa::where('id', $mahasiswa->id)->update($validateData);
-
-        return redirect('/dashboard/mahasiswas')->with('success', 'Data Berhasil Diubah');
     }
 
     /**

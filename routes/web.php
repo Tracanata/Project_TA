@@ -58,7 +58,10 @@ route::get('/dashboard', function () {
     return view('dashboard.index', compact('jumlahajukan', 'jumlahproses', 'jumlahsetujui', 'jumlahtolak', 'tangguhkan'));
 })->middleware('auth');
 
-route::resource('/dashboard/mahasiswas', DashboardMahasiswaController::class)->middleware('admin');
+Route::put('/dashboard/mahasiswas/{mahasiswa}', 'DashboardMahasiswaController@update')->middleware('admin');
+
+
+Route::resource('/dashboard/mahasiswas', DashboardMahasiswaController::class)->middleware('admin');
 route::resource('/dashboard/profils', DashboardProfilController::class)->middleware('mahasiswa');
 Route::resource('/dashboard/prestasis', PrestasiController::class)->middleware('mahasiswa');
 Route::resource('/dashboard/sertifikats', SertifikatController::class)->middleware('mahasiswa');
