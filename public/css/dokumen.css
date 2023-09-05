@@ -1,0 +1,117 @@
+body{
+    padding: 0;
+    background-color: rgb(255, 255, 255);
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.atasan{
+    display: flex;
+    justify-content: center; /* Untuk menengahkan secara horizontal */
+    align-items: center; /* Untuk menengahkan secara vertical */
+    margin-top: 20px;
+}
+
+.atasan-1{
+    display: flex;
+    justify-content: center; /* Untuk menengahkan secara horizontal */
+    align-items: center; /* Untuk menengahkan secara vertical */
+}
+
+.atasan-1 h2{
+    font-size: 17px;
+}
+
+.tabel{
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+    margin-top: 25px;
+}
+
+.tabel p{
+    text-align: justify;
+}
+
+.my-table{
+    width: 65%;
+    text-align: justify;
+}
+
+.p1{
+    margin: 0;
+    padding: 0;
+    font-family: 'Times New Roman', Times, serif;
+    font-size:20px ;
+}
+
+.tabel1{
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+    margin-top: 25px;
+}
+
+.my-table1{
+    width: 80%;
+    text-align: justify;
+}
+
+.p2{
+    margin: 0;
+    padding: 0;
+    margin-bottom: 15px;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.p3{
+    margin: 0;
+    padding: 0;
+    margin-bottom: 5px;
+    margin-left: 10px;
+}
+.p4{
+    margin: 0;
+    padding: 0;
+    margin-left: 15px;
+}
+.p5{
+    margin: 0;
+    padding: 0;
+    margin-left: 35px;
+}
+.p6{
+    margin: 0;
+    padding: 0;
+    margin-top: 15px;
+    margin-left: 35px;
+}
+.p7{
+    margin: 0;
+    padding: 0;
+    margin-top: 13px;
+    margin-left: 35px;
+}
+.p8{
+    margin: 0;
+    padding: 0;
+}
+.p9{
+    margin: 0;
+    padding: 0;
+    margin-top: 15px;
+}
+.p10{
+    margin: 0;
+    padding: 0;
+    color: white;
+}
+.tabel2{
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+
+
+
