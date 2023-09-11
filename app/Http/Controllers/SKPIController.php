@@ -2,15 +2,14 @@
 
 namespace App\Http\Controllers;
 
-
-use Dompdf\Options;
 use App\Models\Prestasi;
 use App\Models\SkpiInfo;
 use App\Models\Mahasiswa;
+use App\Models\Nilai;
 use App\Models\Pengajuan;
 use Illuminate\Http\Request;
-use Barryvdh\DomPDF\Facade\Pdf;
 use Stichoza\GoogleTranslate\GoogleTranslate;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class SKPIController extends Controller
 {
@@ -105,22 +104,50 @@ class SKPIController extends Controller
         $Mahasiswa = $mahasiswa;
         $prestasis = Prestasi::where('mahasiswa_id', $mahasiswa->id)
             ->where('status', 'disetujui')
+            ->where(function ($query) {
+                $query->where('kategori', 'Magang')
+                    ->orWhere('kategori', 'Pelatihan');
+            })
+            ->get();
+        $kegiatans = Prestasi::where('mahasiswa_id', $mahasiswa->id)
+            ->where('status', 'disetujui')
+            ->where(function ($query) {
+                $query->where('kategori', 'Lomba')
+                    ->orWhere('kategori', 'Seminar');
+            })
             ->get();
         $Infos = SkpiInfo::all();
-        $pdf = \Barryvdh\DomPDF\Facade\Pdf::loadView('dashboard.SKPI_Mahasiswas.pdf', compact('Mahasiswa', 'prestasis', 'Infos'))->setPaper('A4', 'portrait');;
+        $nilais = Nilai::all();
+        $pengajuans = Pengajuan::where('mahasiswa_id', $mahasiswa->id)->get();
+        $pdf = Pdf::loadView('dashboard.SKPI_Mahasiswas.pdf', compact('Mahasiswa', 'prestasis', 'kegiatans', 'Infos', 'pengajuans', 'nilais'))->setPaper('A4', 'portrait');
         return $pdf->stream('laporan.pdf');
     }
 
-
-    public function pdfEN(Mahasiswa $mahasiswa)
+    public function PDFen(Mahasiswa $mahasiswa)
     {
+        $lang = new GoogleTranslate();
+        $lang->setSource('id'); // Set the source language to Indonesian
+        $lang->setSource();
+        $lang->setTarget('en'); // Set the target language to English
         $Mahasiswa = $mahasiswa;
         $prestasis = Prestasi::where('mahasiswa_id', $mahasiswa->id)
             ->where('status', 'disetujui')
+            ->where(function ($query) {
+                $query->where('kategori', 'Magang')
+                    ->orWhere('kategori', 'Pelatihan');
+            })
+            ->get();
+        $kegiatans = Prestasi::where('mahasiswa_id', $mahasiswa->id)
+            ->where('status', 'disetujui')
+            ->where(function ($query) {
+                $query->where('kategori', 'Lomba')
+                    ->orWhere('kategori', 'Seminar');
+            })
             ->get();
         $Infos = SkpiInfo::all();
-        // $lang = new GoogleTranslate('en');
-        $pdf = \Barryvdh\DomPDF\Facade\Pdf::loadView('dashboard.SKPI_Mahasiswas.pdfEN', compact('Mahasiswa', 'prestasis', 'Infos'))->setPaper('A4', 'portrait');;
+        $nilais = Nilai::all();
+        $pengajuans = Pengajuan::where('mahasiswa_id', $mahasiswa->id)->get();
+        $pdf = Pdf::loadView('dashboard.SKPI_Mahasiswas.pdfEN', compact('Mahasiswa', 'prestasis', 'kegiatans', 'Infos', 'pengajuans', 'lang', 'nilais'))->setPaper('A4', 'portrait');
         return $pdf->stream('laporan.pdf');
     }
 }

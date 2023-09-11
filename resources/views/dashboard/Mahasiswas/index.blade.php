@@ -27,7 +27,7 @@
 
         <div class="container1">
             <div class="table-responsive col-lg-9">
-                <!-- <a href="/dashboard/mahasiswas/create" class="btn btn-primary mb-3 mt-3">Tambah Data Mahasiswa</a> -->
+                <a href="/dashboard/mahasiswas/create" class="btn btn-primary mb-3 mt-3">Tambah Data Mahasiswa</a>
 
                 <form action="#">
                     <div class="input-group mb-3">

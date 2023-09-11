@@ -15,15 +15,12 @@ use App\Http\Controllers\InfoSkpiController;
 use App\Http\Controllers\PrestasiController;
 use App\Http\Controllers\SkpiInfoController;
 use App\Http\Controllers\StaffMhsController;
-use Stichoza\GoogleTranslate\GoogleTranslate;
 use App\Http\Controllers\PengajuansController;
 use App\Http\Controllers\SertifikatController;
 use App\Http\Controllers\PersetujuanController;
-use App\Http\Controllers\SertifikatsController;
 use App\Http\Controllers\UbahPasswordController;
 use App\Http\Controllers\DashboardProfilController;
 use App\Http\Controllers\DashboardMahasiswaController;
-use App\Http\Controllers\PengajuanController;
 
 /*
 |--------------------------------------------------------------------------
@@ -59,12 +56,14 @@ route::get('/dashboard', function () {
 })->middleware('auth');
 
 route::resource('/dashboard/mahasiswas', DashboardMahasiswaController::class)->middleware('admin');
+route::put('/dashboard/mahasiswas/edit/{mahasiswa:id}', [DashboardMahasiswaController::class, 'ubah'])->middleware('admin');
 route::resource('/dashboard/profils', DashboardProfilController::class)->middleware('mahasiswa');
 Route::resource('/dashboard/prestasis', PrestasiController::class)->middleware('mahasiswa');
 Route::resource('/dashboard/sertifikats', SertifikatController::class)->middleware('mahasiswa');
 Route::resource('/dashboard/news', NewsController::class)->middleware('admin');
 Route::resource('/dashboard/infos', SkpiInfoController::class)->middleware('admin');
 Route::get('/dashboard/infos/edit/{info:id}', [SkpiInfoController::class, 'edit'])->middleware('admin');
+Route::put('/dashboard/infos/edit/{info:id}', [SkpiInfoController::class, 'ubah'])->middleware('admin');
 Route::resource('/dashboard/prodis', ProdiController::class)->middleware('admin');
 
 Route::get('/dashboard/staffmhs', [StaffMhsController::class, 'index'])->middleware('staff');

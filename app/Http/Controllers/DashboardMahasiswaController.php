@@ -100,30 +100,36 @@ class DashboardMahasiswaController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateMahasiswaRequest $request, Mahasiswa $mahasiswa)
+
+    public function ubah(Request $request, $id)
     {
-        dd($request);
-        $rules = [
+        $request->validate([
             'npm' => 'required',
             'nama' => 'required|max:255',
             'jk' => 'required',
             'angkatan' => 'required',
             'prodi_id' => 'required',
             'kelas' => 'required',
+            'no_ijazah' => '',
             'status_aktif' => 'required'
-        ];
-        $validateData = $request->validate($rules);
+        ]);
 
-        $validate = Validator::make($validateData, $rules);
-
-        if (!$validate->fails()) {
-            User::where('id', $mahasiswa->user_id)->update([
-                'name' => $request->nama,
-                'username' => $request->npm,
-            ]);
-        }
-        $validateData['user_id'] = User::where('username', $request->npm)->value('id');
-        Mahasiswa::where('id', $mahasiswa->id)->update($validateData);
+        $mahasiswa = Mahasiswa::findOrFail($id);
+        $user = User::findOrFail($mahasiswa->user_id);
+        $user->update([
+            'name' => $request->input('nama'),
+            'username' => $request->input('npm'),
+        ]);
+        $mahasiswa->update([
+            'npm' => $request->input('npm'),
+            'nama' => $request->input('nama'),
+            'jk' => $request->input('jk'),
+            'angkatan' => $request->input('angkatan'),
+            'prodi_id' => $request->input('prodi_id'),
+            'kelas' => $request->input('kelas'),
+            'no_ijazah' => $request->input('no_ijazah'),
+            'status_aktif' => $request->input('status_aktif'),
+        ]);
 
         return redirect('/dashboard/mahasiswas')->with('success', 'Data Berhasil Diubah');
     }

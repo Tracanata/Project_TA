@@ -106,7 +106,7 @@
                 <div class="row">
 
                     <div class="col-lg-6 video-box align-self-baseline" data-aos="fade-right" data-aos-delay="100">
-                        <img src="/frontend/img/about-video.jpg" class="img-fluid" alt="">
+                        <img src="/img/dokumen.png" class="img-fluid" alt="" width="490">
                     </div>
 
                     <div class="col-lg-6 pt-3 pt-lg-0 content" data-aos="fade-left" data-aos-delay="100">

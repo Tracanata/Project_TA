@@ -26,7 +26,7 @@
                 <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
                     @foreach($profils as $profil)
                     @if($profil->image)
-                    <img src="{{ asset('storage/' . $profil->image) }}" alt="Profile" class="rounded-circle">
+                    <img src="{{ asset('storage/' . $profil->image) }}" alt="Profile" width="100" height="95" class="rounded-circle">
                     @else
                     <img src="/img/anonim.png" alt="Profile" class="rounded-circle">
                     @endif
@@ -135,15 +135,41 @@
                                 @method('put')
                                 @csrf
                                 <div class="row mb-3">
-                                    <label for="profileImage" class="col-md-4 col-lg-3 col-form-label">Profile Image</label>
+                                    <label for="fullName" class="col-md-4 col-lg-3 col-form-label">Profile Image</label>
                                     <div class="col-md-8 col-lg-9">
-                                        <img src="/img/anonim.png" alt="Profile">
-                                        <div class="pt-2">
-                                            <a href="#" class="btn btn-primary btn-sm" title="Upload new profile image"><i class="bi bi-upload"></i></a>
-                                            <a href="#" class="btn btn-danger btn-sm" title="Remove my profile image"><i class="bi bi-trash"></i></a>
+                                        <input type="hidden" name="oldImage" value="{{ $profil->image }}">
+                                        @if($profil->image)
+                                        <img src="{{ asset('storage/' . $profil->image) }}" class="img-preview img-fluid mb-3 col-sm-3 d-block">
+                                        @else
+                                        <img class="img-preview img-fluid mb-3 col-sm-3">
+                                        @endif
+                                        <input class="form-control @error('image') is-invalid @enderror" type="file" id="image" name="image" onchange="previewImage()">
+                                        @error('image')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
                                         </div>
+                                        @enderror
                                     </div>
                                 </div>
+                                <!-- <div class="row mb-3">
+                                    <label for="image" class="form-label">Upload Foto Profil</label>
+                                    <div class="col-md-8 col-lg-9">
+                                        <input type="hidden" name="oldImage" value="{{ $profil->image }}">
+                                        @if($profil->image)
+                                        <img src="{{ asset('storage/' . $profil->image) }}" class="img-preview img-fluid mb-3 col-sm-3 d-block">
+                                        @else
+                                        <img class="img-preview img-fluid mb-3 col-sm-3">
+                                        @endif
+                                    </div>
+                                    <div class="col-md-8 col-lg-9">
+                                        <input class="form-control @error('image') is-invalid @enderror" type="file" id="image" name="image" onchange="previewImage()">
+                                        @error('image')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                        @enderror
+                                    </div>
+                                </div> -->
 
                                 <fieldset disabled="disabled">
                                     <div class="row mb-3">
@@ -226,81 +252,6 @@
                             <!-- End Profile Edit Form -->
 
                         </div>
-
-                        <div class="tab-pane fade pt-3" id="profile-settings">
-
-                            <!-- Settings Form -->
-                            <form>
-
-                                <div class="row mb-3">
-                                    <label for="fullName" class="col-md-4 col-lg-3 col-form-label">Email Notifications</label>
-                                    <div class="col-md-8 col-lg-9">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="changesMade" checked>
-                                            <label class="form-check-label" for="changesMade">
-                                                Changes made to your account
-                                            </label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="newProducts" checked>
-                                            <label class="form-check-label" for="newProducts">
-                                                Information on new products and services
-                                            </label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="proOffers">
-                                            <label class="form-check-label" for="proOffers">
-                                                Marketing and promo offers
-                                            </label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="securityNotify" checked disabled>
-                                            <label class="form-check-label" for="securityNotify">
-                                                Security alerts
-                                            </label>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="text-center">
-                                    <button type="submit" class="btn btn-primary">Save Changes</button>
-                                </div>
-                            </form><!-- End settings Form -->
-
-                        </div>
-
-                        <div class="tab-pane fade pt-3" id="profile-change-password">
-                            <!-- Change Password Form -->
-                            <form>
-
-                                <div class="row mb-3">
-                                    <label for="currentPassword" class="col-md-4 col-lg-3 col-form-label">Current Password</label>
-                                    <div class="col-md-8 col-lg-9">
-                                        <input name="password" type="password" class="form-control" id="currentPassword">
-                                    </div>
-                                </div>
-
-                                <div class="row mb-3">
-                                    <label for="newPassword" class="col-md-4 col-lg-3 col-form-label">New Password</label>
-                                    <div class="col-md-8 col-lg-9">
-                                        <input name="newpassword" type="password" class="form-control" id="newPassword">
-                                    </div>
-                                </div>
-
-                                <div class="row mb-3">
-                                    <label for="renewPassword" class="col-md-4 col-lg-3 col-form-label">Re-enter New Password</label>
-                                    <div class="col-md-8 col-lg-9">
-                                        <input name="renewpassword" type="password" class="form-control" id="renewPassword">
-                                    </div>
-                                </div>
-
-                                <div class="text-center">
-                                    <button type="submit" class="btn btn-primary">Change Password</button>
-                                </div>
-                            </form><!-- End Change Password Form -->
-
-                        </div>
-
                     </div><!-- End Bordered Tabs -->
 
                 </div>
@@ -309,4 +260,20 @@
         </div>
     </div>
 </section>
+<script>
+    function previewImage() {
+        const image = document.querySelector('#image');
+        const imgPreview = document.querySelector('.img-preview');
+
+        imgPreview.style.display = 'block';
+
+        // mengambil data gambar
+        const oFReader = new FileReader();
+        oFReader.readAsDataURL(image.files[0]);
+
+        oFReader.onload = function(oFREvent) {
+            imgPreview.src = oFREvent.target.result;
+        }
+    }
+</script>
 @endsection

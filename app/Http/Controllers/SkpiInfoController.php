@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\SkpiInfo;
+use Illuminate\Http\Request;
 use App\Http\Requests\StoreSkpiInfoRequest;
 use App\Http\Requests\UpdateSkpiInfoRequest;
 
@@ -66,16 +67,34 @@ class SkpiInfoController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateSkpiInfoRequest $request, SkpiInfo $skpiInfo)
+    // public function update(UpdateSkpiInfoRequest $request, SkpiInfo $skpiInfo)
+    // {
+    //     $validateData = $request->validate([
+    //         'pendidikan' => 'required|string',
+    //         'pendidikan_en' => 'required|string',
+    //         'kkni' => 'required|string',
+    //         'kkni_en' => 'required|string'
+    //     ]);
+    //     $skpiInfo->where('id', $skpiInfo->id)->update($validateData);
+
+    //     return redirect('/dashboard/infos')->with('success', 'Data Berhasil Di Edit');
+    // }
+
+    public function ubah(Request $request, $id)
     {
-        $validateData = $request->validate([
+        $request->validate([
             'pendidikan' => 'required|string',
             'pendidikan_en' => 'required|string',
             'kkni' => 'required|string',
             'kkni_en' => 'required|string'
         ]);
-        $skpiInfo->update($validateData);
-
+        $skpiInfo = SkpiInfo::findOrFail($id);
+        $skpiInfo->update([
+            'pendidikan' => $request->input('pendidikan'),
+            'pendidikan_en' => $request->input('pendidikan_en'),
+            'kkni' => $request->input('kkni'),
+            'kkni_en' => $request->input('kkni_en'),
+        ]);
         return redirect('/dashboard/infos')->with('success', 'Data Berhasil Di Edit');
     }
 

@@ -78,7 +78,7 @@ class PrestasiController extends Controller
                 ->update(['status_pengajuan' => 'diajukan']);
             return redirect('/dashboard/prestasis')->with('success', 'Data Telah diajukan');
         } elseif ($prestasiUser) {
-            Prestasi::where('user_id', auth()->user()->id)
+            Prestasi::where('user_id', auth()->user()->user_id)
                 ->where('status', 'ada')
                 ->orWhere('status', 'ditolak')
                 ->update(['status' => 'diajukan']);

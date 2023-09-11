@@ -10,7 +10,7 @@
         </div>
 
         <div class="col-lg-8">
-            <form method="post" action="/dashboard/mahasiswas/{{$mahasiswa->id}}" enctype="multipart/form-data">
+            <form method="post" action="/dashboard/mahasiswas/edit/{{$mahasiswa->id}}" enctype="multipart/form-data">
                 @method('put')
                 @csrf
                 <div class="mb-3">
@@ -76,16 +76,6 @@
                         {{ $message }}
                     </div>
                     @enderror
-                </div>
-                <div class="mb-3">
-                    <label for="jmlh_smt" class="form-label">Jumlah Semester</label>
-                    <select class="form-select" name="jmlh_smt">
-                        <option selected disabled>--Total Semester--</option>
-                        <option value="7" {{ old('jmlh_smt', $mahasiswa->jmlh_smt)=='7' ? 'selected' : '' }}>7</option>
-                        <option value="8" {{ old('jmlh_smt', $mahasiswa->jmlh_smt)=='8' ? 'selected' : '' }}>8</option>
-                        <option value="9" {{ old('jmlh_smt', $mahasiswa->jmlh_smt)=='9' ? 'selected' : '' }}>9</option>
-                        <option value="10" {{ old('jmlh_smt', $mahasiswa->jmlh_smt)=='10' ? 'selected' : '' }}>10</option>
-                    </select>
                 </div>
                 <div class="mb-3">
                     <label for="status_aktif" class="form-label">Status Aktif</label>

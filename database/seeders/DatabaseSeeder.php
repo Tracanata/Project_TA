@@ -58,52 +58,6 @@ class DatabaseSeeder extends Seeder
             'password' => bcrypt('12345'),
         ]);
 
-        User::create([
-            'username' => '12345',
-            'name' => 'Fulan',
-            'roles' => 'staff',
-            'password' => bcrypt('12345'),
-        ]);
-
-        User::create([
-            'username' => '5520119067',
-            'name' => 'Fatra Candra Ardiwinata',
-            'roles' => 'mahasiswa',
-            'password' => bcrypt('12345')
-        ]);
-
-        Mahasiswa::create([
-            'prodi_id' => '1',
-            'user_id' => '7',
-            'npm' => '5520119067',
-            'nama' => 'Fatra Candra Ardiwinata',
-            'angkatan' => '2019',
-            'kelas' => 'Reguler',
-            'jk' => 'Laki-Laki',
-            'status_aktif' => 'Lulus',
-            'no_ijazah' => '2112/2023',
-            'status_pengajuan' => 'ada'
-        ]);
-
-        User::create([
-            'username' => '1221344356',
-            'name' => 'Rayhan Nur Muhammad',
-            'roles' => 'mahasiswa',
-            'password' => bcrypt('12345')
-        ]);
-
-        Mahasiswa::create([
-            'prodi_id' => '1',
-            'user_id' => '8',
-            'npm' => '1221344356',
-            'nama' => 'Rayhan Nur Muhammad',
-            'angkatan' => '2019',
-            'kelas' => 'Reguler',
-            'jk' => 'Laki-Laki',
-            'status_aktif' => 'Lulus',
-            'no_ijazah' => '1221/2023',
-            'status_pengajuan' => 'ada'
-        ]);
 
         Prodi::create([
             'N_prodi' => 'Teknik Informatika',

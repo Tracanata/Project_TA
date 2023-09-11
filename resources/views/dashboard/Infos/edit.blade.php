@@ -8,7 +8,7 @@
         </div>
         <div class="col-lg-8 mb-5">
             @foreach($infos as $info)
-            <form method="post" action="/dashboard/infos/{{$info->id}}" enctype="multipart/form-data">
+            <form method="post" action="/dashboard/infos/edit/{{$info->id}}" enctype="multipart/form-data">
                 @method('put')
                 @csrf
                 <div class="mb-3">

@@ -8,7 +8,7 @@
             <div class="card">
                 <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
                     @if($mahasiswa->image)
-                    <img src="{{ asset('storage/' . $mahasiswa->image) }}" alt="Profile" class="rounded-circle">
+                    <img src="{{ asset('storage/' . $mahasiswa->image) }}" alt="Profile" width="150" height="150" class="rounded-circle">
                     @else
                     <img src="/img/anonim.png" alt="Profile" class="rounded-circle">
                     @endif
@@ -113,9 +113,6 @@
                             @foreach($prestasis as $prestasi)
                             <div class="card">
                                 <div class="card-body">
-
-                                    <img src="{{ asset('storage/' . $prestasi->image) }} " width="100" alt=" {{ $prestasi->nama }}" class="img-fluid mt-2">
-
                                     <div class="row">
                                         <div class="col-lg-3 col-md-4 label mt-4">Nama Kegiatan</div>
                                         <div class="col-lg-9 col-md-8 mt-4">{{$prestasi->nama}}</div>
@@ -137,6 +134,28 @@
                                     <div class="row">
                                         <div class="col-lg-3 col-md-4 label ">Kategori</div>
                                         <div class="col-lg-9 col-md-8">{{$prestasi->kategori}}</div>
+                                    </div>
+                                    <!-- Button trigger modal -->
+                                    <button type="button" class="btn btn-primary mt-2" data-bs-toggle="modal" data-bs-target="#bukti{{$prestasi->id}}">
+                                        Bukti Kegiatan
+                                    </button>
+
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="bukti{{$prestasi->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <img src="{{ asset('storage/' . $prestasi->image) }} " width="600" alt=" {{ $prestasi->nama }}" class="img-fluid mt-2">
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

@@ -18,7 +18,7 @@
             <div class="card">
                 <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
                     @if($Mahasiswa->image)
-                    <img src="{{ asset('storage/' . $Mahasiswa->image) }}" alt="Profile" class="rounded-circle">
+                    <img src="{{ asset('storage/' . $Mahasiswa->image) }}" alt="Profile" width="100" height="95" class="rounded-circle">
                     @else
                     <img src="/img/anonim.png" alt="Profile" class="rounded-circle">
                     @endif
@@ -51,8 +51,8 @@
                                     Unduh PDF
                                 </a>
                                 <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="/PDF/{{$Mahasiswa->id}}">Unduh Bahasa Indonesia</a></li>
-                                    <li><a class="dropdown-item" href="/PDF/{{$Mahasiswa->id}}/EN">Unduh Bahasa Inggris</a></li>
+                                    <li><a class="dropdown-item" href="/PDF/{{$Mahasiswa->id}}" target="_blank">Unduh Bahasa Indonesia</a></li>
+                                    <li><a class="dropdown-item" href="/PDF/{{$Mahasiswa->id}}/EN" target="_blank">Unduh Bahasa Inggris</a></li>
                                 </ul>
                             </div>
 

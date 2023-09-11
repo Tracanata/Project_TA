@@ -26,7 +26,6 @@ return new class extends Migration
             $table->string('email')->nullable();
             $table->date('ttl')->nullable();
             $table->string('no_ijazah')->unique()->nullable();
-            $table->string('jmlh_smt')->nullable();
             $table->date('thn_lulus')->nullable();
             $table->string('image')->nullable();
             $table->string('pendidikan_lanjut')->nullable();

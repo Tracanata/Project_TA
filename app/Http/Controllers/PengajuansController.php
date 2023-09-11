@@ -37,7 +37,9 @@ class PengajuansController extends Controller
     {
         return view('dashboard.pengajuans.show', [
             "mahasiswa" => $mahasiswa,
-            "prestasis" => Prestasi::where('mahasiswa_id', $mahasiswa->id)->get()
+            "prestasis" => Prestasi::where('mahasiswa_id', $mahasiswa->id)
+                ->whereIn('status', ['dipilih', 'diajukan'])
+                ->get()
         ]);
     }
 
@@ -104,7 +106,7 @@ class PengajuansController extends Controller
             ->where('status_pengajuan', 'diajukan')
             ->update(['status_pengajuan' => 'ditolak']);
 
-        Prestasi::where('id', $mahasiswa->id)
+        Prestasi::where('id', $mahasiswa->mahasiswa_id)
             ->where('status', 'diajukan')
             ->update(['status' => 'ditolak']);
 
