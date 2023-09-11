@@ -100,7 +100,7 @@ class DashboardMahasiswaController extends Controller
     /**
      * Update the specified resource in storage.
      */
-<<<<<<< HEAD
+
 
     public function ubah(Request $request, $id)
     {
@@ -133,40 +133,6 @@ class DashboardMahasiswaController extends Controller
         ]);
 
         return redirect('/dashboard/mahasiswas')->with('success', 'Data Berhasil Diubah');
-=======
-    // public function update(UpdateMahasiswaRequest $request, Mahasiswa $mahasiswa)
-    // {
-    public function update(Request $request, Mahasiswa $mahasiswa)
-    {
-        try {
-            // dd($request->all());
-            $rules = [
-                'npm' => 'required',
-                'nama' => 'required|max:255',
-                'jk' => 'required',
-                'angkatan' => 'required',
-                'prodi_id' => 'required',
-                'kelas' => 'required',
-                'status_aktif' => 'required'
-            ];
-            $validateData = $request->validate($rules);
-
-            $validate = Validator::make($validateData, $rules);
-
-            if (!$validate->fails()) {
-                User::where('id', $mahasiswa->user_id)->update([
-                    'name' => $request->nama,
-                    'username' => $request->npm,
-                ]);
-            }
-            $validateData['user_id'] = User::where('username', $request->npm)->value('id');
-            Mahasiswa::where('id', $mahasiswa->id)->update($validateData);
-
-            return redirect('/dashboard/mahasiswas')->with('success', 'Data Berhasil Diubah');
-        } catch (Exception $e) {
-            dd($e->getMessage());
-        }
->>>>>>> 67a1a279f8f6644f4b6b35dcb213864b0694f1d8
     }
 
     /**
